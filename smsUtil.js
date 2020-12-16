@@ -1,10 +1,9 @@
-const config = require('./config.json')
-const client = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
 
 const sendSms = ({ body, onSuccess = () => {}, onError = () => {} }) => {
   client.messages.create({
-    to: config.TO_NUMBER,
-    from: config.FROM_NUMBER,
+    to: process.env.TWILIO_TO_NUMBER,
+    from: process.env.TWILIO_FROM_NUMBER,
     body,
   })
   .then((message) => onSuccess(message))
